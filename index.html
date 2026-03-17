@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIRCLE — Your crowd. Your city.</title>
+<meta name="description" content="CIRCLE curates real-life experiences in Porto matched to your vibe — and lets you see who's going before you show up. No random crowds. Just your people.">
+<meta property="og:title" content="CIRCLE — Your crowd. Your city.">
+<meta property="og:description" content="Curated real-life experiences in Porto matched to your vibe. See who's going before you show up.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://joincircle.app">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='none' stroke='%235b4aff' stroke-width='3'/><circle cx='16' cy='16' r='5' fill='%235b4aff'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink: #09090f;
+  --ink2: #111118;
+  --paper: #f7f6f2;
+  --accent: #5b4aff;
+  --accent-light: #ece9ff;
+  --accent-muted: #a099e8;
+  --warm: #ff6b35;
+  --warm-light: #fff0ea;
+  --rule: #1e1e2a;
+  --rule-light: #e2e0d8;
+  --text: #2a2835;
+  --muted: #8b8999;
+  --radius: 4px;
+
+  /* circle community colors */
+  --c-arts:    #c8f04a;
+  --c-music:   #ff6b35;
+  --c-food:    #f0a500;
+  --c-sport:   #4affb4;
+  --c-social:  #5b4aff;
+  --c-wellness:#ff4af0;
+  --c-film:    #4ac8ff;
+  --c-queer:   #ff4a7a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--ink);
+  color: #e8e6f0;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  background: rgba(9,9,15,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  z-index: 200;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 0.2em;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-ring {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo-ring::after {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+nav { display: flex; align-items: center; gap: 32px; }
+nav a { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.45); text-decoration: none; letter-spacing: 0.04em; transition: color 0.15s; }
+nav a:hover { color: white; }
+
+.nav-cta {
+  background: white !important;
+  color: var(--ink) !important;
+  padding: 8px 20px;
+  border-radius: 40px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 12px !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background 0.15s, transform 0.12s !important;
+}
+.nav-cta:hover { background: var(--accent-light) !important; color: var(--accent) !important; transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 100px 40px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--rule);
+  color: rgba(255,255,255,0.5);
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 40px;
+  margin-bottom: 32px;
+}
+
+.hero-tag-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--c-arts);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(42px, 5.5vw, 68px);
+  line-height: 1.0;
+  color: white;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+
+.hero h1 .grad {
+  background: linear-gradient(90deg, var(--accent) 0%, var(--c-wellness) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero h1 .warm-txt { color: var(--warm); -webkit-text-fill-color: var(--warm); }
+
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.45);
+  font-weight: 300;
+  line-height: 1.75;
+  max-width: 440px;
+  margin-bottom: 44px;
+}
+
+.hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  color: var(--ink);
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: 40px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.12s, color 0.15s;
+}
+.btn-primary:hover { background: var(--accent); color: white; transform: translateY(-2px); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.45);
+  font-size: 13px;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.btn-ghost:hover { color: white; }
+
+/* ── CIRCLES VISUAL ── */
+.hero-visual {
+  position: relative;
+  height: 520px;
+  opacity: 0;
+  animation: fadeUp 1s 0.4s forwards;
+}
+
+.orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.06);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.orbit-1 { width: 160px; height: 160px; }
+.orbit-2 { width: 280px; height: 280px; }
+.orbit-3 { width: 400px; height: 400px; }
+.orbit-4 { width: 500px; height: 500px; }
+
+/* Center circle */
+.c-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: white;
+  z-index: 10;
+  box-shadow: 0 0 40px rgba(91,74,255,0.4);
+}
+
+/* Community bubble */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+  z-index: 5;
+}
+
+.bubble:hover { transform: scale(1.12); }
+
+.bubble-inner {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.bubble-emoji { font-size: 20px; line-height: 1; }
+.bubble-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.7);
+}
+
+/* Orbit 2 bubbles - medium */
+.b-arts   { width:72px;height:72px; background:var(--c-arts);   top:4%;  left:62%; }
+.b-music  { width:68px;height:68px; background:var(--c-music);  top:72%; left:58%; }
+.b-food   { width:64px;height:64px; background:var(--c-food);   top:38%; left:2%;  }
+
+/* Orbit 3 bubbles - outer */
+.b-sport   { width:80px;height:80px; background:var(--c-sport);   top:10%; left:14%; }
+.b-wellness{ width:74px;height:74px; background:var(--c-wellness); top:65%; left:8%;  }
+.b-film    { width:70px;height:70px; background:var(--c-film);    top:75%; left:72%; }
+.b-queer   { width:66px;height:66px; background:var(--c-queer);   top:2%;  left:38%; }
+.b-social  { width:60px;height:60px; background:var(--accent-light); top:82%;left:40%; }
+
+/* connector lines */
+.connector {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform-origin: 0 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(91,74,255,0.3), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* floating event pill */
+.event-pill {
+  position: absolute;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 40px;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  z-index: 20;
+  animation: float 4s ease-in-out infinite;
+}
+
+.event-pill:nth-child(2) { animation-delay: -1.3s; }
+.event-pill:nth-child(3) { animation-delay: -2.6s; }
+
+@keyframes float {
+  0%,100%{ transform: translateY(0px); }
+  50%    { transform: translateY(-8px); }
+}
+
+.pill-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.pill-text { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.75); }
+.pill-count { font-size: 10px; color: rgba(255,255,255,0.35); }
+
+.ep-1 { top: 8%;  right: 2%; }
+.ep-2 { bottom: 18%; right: 0%; }
+.ep-3 { bottom: 6%; left: 4%; }
+
+/* ── TICKER ── */
+.ticker-wrap {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+  padding: 14px 0;
+  background: var(--ink2);
+}
+
+.ticker-track {
+  display: flex;
+  gap: 0;
+  animation: ticker 28s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes ticker { 0%{ transform: translateX(0); } 100%{ transform: translateX(-50%); } }
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 32px;
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+
+.ticker-item span {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── CIRCLES SECTION ── */
+.circles-section {
+  padding: 100px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+
+.circles-section.visible { opacity: 1; transform: translateY(0); }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  border: 1px solid var(--rule);
+  padding: 4px 12px;
+  border-radius: 40px;
+  margin-bottom: 24px;
+}
+
+.section-h2 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 44px);
+  color: white;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.section-h2 em { font-style: normal; background: linear-gradient(90deg, var(--accent), var(--c-wellness)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.section-lead {
+  font-size: 15px;
+  color: rgba(255,255,255,0.35);
+  font-weight: 300;
+  max-width: 480px;
+  line-height: 1.7;
+  margin-bottom: 56px;
+}
+
+/* Community cards grid */
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.community-card {
+  border-radius: 16px;
+  padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.community-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+
+.community-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  filter: brightness(0.85);
+  z-index: 0;
+  transition: filter 0.2s;
+}
+
+.community-card:hover::before { filter: brightness(1); }
+
+.cc-arts    { background: var(--c-arts); }
+.cc-music   { background: var(--c-music); }
+.cc-food    { background: var(--c-food); }
+.cc-sport   { background: var(--c-sport); }
+.cc-wellness{ background: var(--c-wellness); }
+.cc-film    { background: var(--c-film); }
+.cc-queer   { background: var(--c-queer); }
+.cc-social  { background: var(--accent); }
+
+.cc-top { position: relative; z-index: 1; }
+.cc-emoji { font-size: 28px; line-height: 1; margin-bottom: 10px; display: block; }
+.cc-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: rgba(0,0,0,0.75);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.cc-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cc-count {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.5);
+}
+
+.cc-arrow {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* wide card spans 2 cols */
+.cc-wide { grid-column: span 2; }
+
+/* ── STATS ── */
+.stats-section {
+  background: var(--ink2);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 40px;
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  divide: 1px solid var(--rule);
+}
+
+.stat-block {
+  padding: 56px 32px;
+  border-right: 1px solid var(--rule);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+
+.stat-block:last-child { border-right: none; }
+.stat-block.visible { opacity: 1; transform: translateY(0); }
+.stat-block:nth-child(2) { transition-delay: 0.1s; }
+.stat-block:nth-child(3) { transition-delay: 0.2s; }
+.stat-block:nth-child(4) { transition-delay: 0.3s; }
+
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 44px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.stat-num sup { font-size: 22px; color: var(--accent); vertical-align: super; }
+.stat-desc { font-size: 13px; color: rgba(255,255,255,0.3); font-weight: 300; line-height: 1.55; max-width: 180px; }
+
+/* ── HOW IT WORKS ── */
+.how-section {
+  padding: 100px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+
+.how-section.visible { opacity: 1; transform: translateY(0); }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.step {
+  background: var(--ink2);
+  padding: 40px 32px;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.step:hover { background: #16161f; }
+
+.step-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 52px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.06);
+  line-height: 1;
+  margin-bottom: 24px;
+  letter-spacing: -0.04em;
+}
+
+.step-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.step-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.step-desc { font-size: 14px; color: rgba(255,255,255,0.35); font-weight: 300; line-height: 1.65; }
+
+/* ── VOICES ── */
+.voices-section {
+  padding: 100px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+
+.voices-section.visible { opacity: 1; transform: translateY(0); }
+
+.voices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.voice-card {
+  background: var(--ink2);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 32px 28px;
+  transition: border-color 0.2s;
+}
+
+.voice-card:hover { border-color: rgba(255,255,255,0.12); }
+
+.voice-circle-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Syne', sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 40px;
+  margin-bottom: 20px;
+  color: rgba(0,0,0,0.6);
+}
+
+.voice-quote {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  font-weight: 300;
+  line-height: 1.75;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+.voice-author { display: flex; align-items: center; gap: 12px; }
+
+.voice-av {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Syne', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0,0,0,0.6);
+  flex-shrink: 0;
+}
+
+.voice-name { font-size: 13px; font-weight: 500; color: white; }
+.voice-role { font-size: 11px; color: rgba(255,255,255,0.3); }
+
+/* ── CTA ── */
+.cta-section {
+  margin: 0 40px 80px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #1a1528 0%, #0d0d14 50%, #1a1020 100%);
+  border: 1px solid var(--rule);
+  padding: 100px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-rings {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.cta-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(91,74,255,0.08);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cta-ring-1 { width: 300px; height: 300px; }
+.cta-ring-2 { width: 500px; height: 500px; border-color: rgba(91,74,255,0.05); }
+.cta-ring-3 { width: 700px; height: 700px; border-color: rgba(91,74,255,0.03); }
+.cta-ring-4 { width: 900px; height: 900px; border-color: rgba(91,74,255,0.02); }
+
+.cta-glow {
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91,74,255,0.12) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.cta-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 540px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+
+.cta-inner.visible { opacity: 1; transform: translateY(0); }
+
+.cta-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--rule);
+  color: rgba(255,255,255,0.4);
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 40px;
+  margin-bottom: 28px;
+}
+
+.cta-h2 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(32px, 5vw, 54px);
+  color: white;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+
+.cta-h2 em { font-style: normal; background: linear-gradient(90deg, var(--accent-muted), white); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.cta-sub { font-size: 15px; color: rgba(255,255,255,0.35); font-weight: 300; margin-bottom: 44px; line-height: 1.7; }
+
+.waitlist-form {
+  display: flex;
+  gap: 8px;
+  max-width: 420px;
+  margin: 0 auto 16px;
+}
+
+.waitlist-input {
+  flex: 1;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 40px;
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.waitlist-input::placeholder { color: rgba(255,255,255,0.25); }
+.waitlist-input:focus { border-color: rgba(91,74,255,0.5); }
+
+.waitlist-btn {
+  padding: 14px 28px;
+  background: white;
+  color: var(--ink);
+  border: none;
+  border-radius: 40px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.12s, color 0.15s;
+  white-space: nowrap;
+}
+
+.waitlist-btn:hover { background: var(--accent); color: white; transform: translateY(-1px); }
+
+.waitlist-note { font-size: 12px; color: rgba(255,255,255,0.2); font-weight: 300; }
+.waitlist-success { display: none; color: white; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; }
+.waitlist-success span { color: var(--accent-muted); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--ink2);
+}
+
+.footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.18em; color: rgba(255,255,255,0.2); text-decoration: none; }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.15); font-weight: 300; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 12px; color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.15s; }
+.footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1000px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .community-grid { grid-template-columns: repeat(2, 1fr); }
+  .cc-wide { grid-column: span 1; }
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .voices { grid-template-columns: 1fr; }
+  nav a:not(.nav-cta) { display: none; }
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 100px 24px 60px; }
+  .circles-section, .how-section, .voices-section { padding: 72px 24px; }
+  .cta-section { margin: 0 16px 60px; padding: 72px 28px; }
+  .stats-inner { grid-template-columns: 1fr; }
+  .stat-block { border-right: none; border-bottom: 1px solid var(--rule); }
+  .waitlist-form { flex-direction: column; }
+  footer { flex-direction: column; gap: 16px; text-align: center; padding: 28px 24px; }
+  header { padding: 0 24px; }
+  .community-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#">
+    <div class="logo-ring"></div>
+    CIRCLE
+  </a>
+  <nav>
+    <a href="#circles">Circles</a>
+    <a href="#how">How it works</a>
+    <a href="#voices">Community</a>
+    <a href="#waitlist" class="nav-cta">Join waitlist</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="hero-tag-dot"></span>
+      Now launching · Porto
+    </div>
+    <h1>Find your<br><span class="grad">circle</span> in<br><span class="warm-txt">the city.</span></h1>
+    <p class="hero-sub">Curated real-life experiences matched to your vibe — from soft clubbing mornings to creative workshops to social dinners. See who's going before you show up.</p>
+    <div class="hero-actions">
+      <a href="#waitlist" class="btn-primary">
+        Get early access
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#circles" class="btn-ghost">
+        Explore circles
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- ORBIT VISUAL -->
+  <div class="hero-visual">
+    <div class="orbit orbit-1"></div>
+    <div class="orbit orbit-2"></div>
+    <div class="orbit orbit-3"></div>
+    <div class="orbit orbit-4"></div>
+    <div class="c-center">YOU</div>
+
+    <!-- Bubbles -->
+    <div class="bubble b-arts">
+      <div class="bubble-inner">
+        <span class="bubble-emoji">🎨</span>
+        <span class="bubble-label">Arts</span>
+      </div>
+    </div>
+    <div class="bubble b-music">
+      <div class="bubble-inner">
+        <span class="bubble-emoji">🎵</span>
+        <span class="bubble-label">Music</span>
+      </div>
+    </div>
+    <div class="bubble b-food">
+      <div class="bubble-inner">
+        <span class="bubble-emoji">🍷</span>
+        <span class="bubble-label">Food</span>
+      </div>
+    </div>
+    <div class="bubble b-sport">
+      <div class="bubble-inner">
+        <span class="bubble-emoji">⚡</span>
+        <span class="bubble-label">Sport</span>
+      </div>
+    </div>
+    <div class="bubble b-wellness">
+      <div class="bubble-inner">
+        <span class="bubble-emoji">✨</span>
+        <span class="bubble-label">Wellness</span>
+      </div>
+    </div>
+    <div class="bubble b-film">
+      <div class="bubble-inner">
+        <span class="bubble-emoji">🎬</span>
+        <span class="bubble-label">Film</span>
+      </div>
+    </div>
+    <div class="bubble b-queer">
+      <div class="bubble-inner">
+        <span class="bubble-emoji">🌈</span>
+        <span class="bubble-label">Queer</span>
+      </div>
+    </div>
+    <div class="bubble b-social">
+      <div class="bubble-inner">
+        <span class="bubble-emoji">🫂</span>
+        <span class="bubble-label">Social</span>
+      </div>
+    </div>
+
+    <!-- Floating pills -->
+    <div class="event-pill ep-1">
+      <span class="pill-dot" style="background:var(--c-arts)"></span>
+      <span class="pill-text">Soft clubbing morning</span>
+      <span class="pill-count">28 going</span>
+    </div>
+    <div class="event-pill ep-2">
+      <span class="pill-dot" style="background:var(--c-food)"></span>
+      <span class="pill-text">Social dinner</span>
+      <span class="pill-count">14 going</span>
+    </div>
+    <div class="event-pill ep-3">
+      <span class="pill-dot" style="background:var(--c-music)"></span>
+      <span class="pill-text">Quiz night</span>
+      <span class="pill-count">22 going</span>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <!-- duplicated for seamless loop -->
+    <span class="ticker-item"><span style="background:var(--c-arts)"></span>Creative workshops</span>
+    <span class="ticker-item"><span style="background:var(--c-music)"></span>Live music nights</span>
+    <span class="ticker-item"><span style="background:var(--c-food)"></span>Social dinners</span>
+    <span class="ticker-item"><span style="background:var(--c-sport)"></span>Sports meetups</span>
+    <span class="ticker-item"><span style="background:var(--c-wellness)"></span>Wellness sessions</span>
+    <span class="ticker-item"><span style="background:var(--c-film)"></span>Film screenings</span>
+    <span class="ticker-item"><span style="background:var(--c-queer)"></span>Queer spaces</span>
+    <span class="ticker-item"><span style="background:var(--accent)"></span>Soft clubbing</span>
+    <span class="ticker-item"><span style="background:var(--warm)"></span>Rooftop gatherings</span>
+    <span class="ticker-item"><span style="background:var(--c-arts)"></span>Creative workshops</span>
+    <span class="ticker-item"><span style="background:var(--c-music)"></span>Live music nights</span>
+    <span class="ticker-item"><span style="background:var(--c-food)"></span>Social dinners</span>
+    <span class="ticker-item"><span style="background:var(--c-sport)"></span>Sports meetups</span>
+    <span class="ticker-item"><span style="background:var(--c-wellness)"></span>Wellness sessions</span>
+    <span class="ticker-item"><span style="background:var(--c-film)"></span>Film screenings</span>
+    <span class="ticker-item"><span style="background:var(--c-queer)"></span>Queer spaces</span>
+    <span class="ticker-item"><span style="background:var(--accent)"></span>Soft clubbing</span>
+    <span class="ticker-item"><span style="background:var(--warm)"></span>Rooftop gatherings</span>
+  </div>
+</div>
+
+<!-- CIRCLES SECTION -->
+<section class="circles-section" id="circles" data-section>
+  <div class="eyebrow">Your circles</div>
+  <h2 class="section-h2">Every vibe has<br><em>its circle.</em></h2>
+  <p class="section-lead">Eight communities, one city. Find the nights that feel made for you — or explore all of them.</p>
+
+  <div class="community-grid">
+    <div class="community-card cc-arts cc-wide">
+      <div class="cc-top">
+        <span class="cc-emoji">🎨</span>
+        <div class="cc-title">Arts &<br>Creative</div>
+      </div>
+      <div class="cc-footer">
+        <span class="cc-count">Workshops · Exhibitions · Zine fairs</span>
+        <div class="cc-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="community-card cc-music">
+      <div class="cc-top">
+        <span class="cc-emoji">🎵</span>
+        <div class="cc-title">Music &<br>Nightlife</div>
+      </div>
+      <div class="cc-footer">
+        <span class="cc-count">Vinyl nights · Live acts</span>
+        <div class="cc-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="community-card cc-food">
+      <div class="cc-top">
+        <span class="cc-emoji">🍷</span>
+        <div class="cc-title">Food &<br>Drinks</div>
+      </div>
+      <div class="cc-footer">
+        <span class="cc-count">Social dinners · Tastings</span>
+        <div class="cc-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="community-card cc-sport">
+      <div class="cc-top">
+        <span class="cc-emoji">⚡</span>
+        <div class="cc-title">Sport &<br>Active</div>
+      </div>
+      <div class="cc-footer">
+        <span class="cc-count">Paddle · Runs · Surf</span>
+        <div class="cc-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="community-card cc-wellness">
+      <div class="cc-top">
+        <span class="cc-emoji">✨</span>
+        <div class="cc-title">Wellness &<br>Mind</div>
+      </div>
+      <div class="cc-footer">
+        <span class="cc-count">Yoga · Meditation · Sound baths</span>
+        <div class="cc-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="community-card cc-film">
+      <div class="cc-top">
+        <span class="cc-emoji">🎬</span>
+        <div class="cc-title">Film &<br>Culture</div>
+      </div>
+      <div class="cc-footer">
+        <span class="cc-count">Screenings · Talks · Book clubs</span>
+        <div class="cc-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="community-card cc-queer">
+      <div class="cc-top">
+        <span class="cc-emoji">🌈</span>
+        <div class="cc-title">Queer<br>Spaces</div>
+      </div>
+      <div class="cc-footer">
+        <span class="cc-count">Safe · Celebratory · Yours</span>
+        <div class="cc-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="community-card cc-social cc-wide">
+      <div class="cc-top">
+        <span class="cc-emoji">🫂</span>
+        <div class="cc-title" style="color:rgba(255,255,255,0.8);">New in town?<br>Start here.</div>
+      </div>
+      <div class="cc-footer">
+        <span class="cc-count" style="color:rgba(255,255,255,0.4);">Erasmus · Expats · Just arrived</span>
+        <div class="cc-arrow" style="background:rgba(255,255,255,0.1);">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stats-inner">
+    <div class="stat-block" data-stat>
+      <div class="stat-num">57<sup>%</sup></div>
+      <div class="stat-desc">of Europeans 18–35 feel at least moderately lonely</div>
+    </div>
+    <div class="stat-block" data-stat>
+      <div class="stat-num">76<sup>%</sup></div>
+      <div class="stat-desc">of our survey respondents want to see who's going before attending</div>
+    </div>
+    <div class="stat-block" data-stat>
+      <div class="stat-num">40<sup>k+</sup></div>
+      <div class="stat-desc">students in Porto ready to find their circle</div>
+    </div>
+    <div class="stat-block" data-stat>
+      <div class="stat-num">8</div>
+      <div class="stat-desc">distinct communities launching in Porto first</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how" data-section>
+  <div class="eyebrow">How it works</div>
+  <h2 class="section-h2">Three steps to<br><em>your people</em></h2>
+  <p class="section-lead">CIRCLE removes every barrier between you and a night worth remembering.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-icon" style="background:rgba(91,74,255,0.15);">🎯</div>
+      <div class="step-title">Pick your circles</div>
+      <p class="step-desc">Tell us which communities feel like you — arts, music, food, sport, wellness, and more. Your feed is built from your choices, not a generic algorithm.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-icon" style="background:rgba(255,107,53,0.15);">✦</div>
+      <div class="step-title">Discover curated events</div>
+      <p class="step-desc">Browse handpicked experiences — each one designed around a specific vibe, atmosphere, and crowd. No random listings. Just things worth showing up for.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-icon" style="background:rgba(74,255,180,0.15);">👥</div>
+      <div class="step-title">Know before you go</div>
+      <p class="step-desc">See who else is going and chat before the event. Arrive knowing faces, not strangers. Show up to a circle, not a crowd.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section class="voices-section" id="voices" data-section>
+  <div class="eyebrow">Community voices</div>
+  <h2 class="section-h2">The problem is real.<br><em>People are ready.</em></h2>
+  <p class="section-lead">From our early research in Porto — these are the people Circle is built for.</p>
+
+  <div class="voices">
+    <div class="voice-card">
+      <div class="voice-circle-tag" style="background:var(--accent-light);color:var(--accent);">🎨 Arts circle</div>
+      <p class="voice-quote">I scroll Instagram for hours trying to find something to do — I can see events but I never know if they're for people like me, or if I'll end up standing alone in a corner.</p>
+      <div class="voice-author">
+        <div class="voice-av" style="background:var(--accent-light);color:var(--accent);">SH</div>
+        <div>
+          <div class="voice-name">Shadi, 22</div>
+          <div class="voice-role">Erasmus student · Porto</div>
+        </div>
+      </div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-circle-tag" style="background:rgba(255,107,53,0.15);color:var(--warm);">🎵 Music circle</div>
+      <p class="voice-quote">I always end up going to the same bars with the same people. I want to try something different but everything online feels either too touristy or too random.</p>
+      <div class="voice-author">
+        <div class="voice-av" style="background:rgba(255,107,53,0.15);color:var(--warm);">MG</div>
+        <div>
+          <div class="voice-name">Miguel, 20</div>
+          <div class="voice-role">Engineering student · Porto</div>
+        </div>
+      </div>
+    </div>
+    <div class="voice-card">
+      <div class="voice-circle-tag" style="background:rgba(74,255,180,0.1);color:var(--c-sport);">✨ Wellness circle</div>
+      <p class="voice-quote">After uni, my social circle just shrank. I want to meet interesting people but networking feels forced and bars feel random. I just want something in between.</p>
+      <div class="voice-author">
+        <div class="voice-av" style="background:rgba(74,255,180,0.1);color:var(--c-sport);">EM</div>
+        <div>
+          <div class="voice-name">Emily, 27</div>
+          <div class="voice-role">Marketing exec · Porto</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section" id="waitlist">
+  <div class="cta-rings">
+    <div class="cta-ring cta-ring-1"></div>
+    <div class="cta-ring cta-ring-2"></div>
+    <div class="cta-ring cta-ring-3"></div>
+    <div class="cta-ring cta-ring-4"></div>
+  </div>
+  <div class="cta-glow"></div>
+
+  <div class="cta-inner" data-cta>
+    <div class="cta-tag">
+      <span class="hero-tag-dot" style="background:var(--c-arts)"></span>
+      Porto · Coming soon
+    </div>
+    <h2 class="cta-h2">Be first in<br><em>your circle.</em></h2>
+    <p class="cta-sub">Join the waitlist and get early access when CIRCLE launches in Porto. No spam — just your invite when it's ready.</p>
+
+    <div class="waitlist-form" id="wl-form">
+      <input class="waitlist-input" type="email" placeholder="your@email.com" id="wl-email">
+      <button class="waitlist-btn" id="wl-btn">Join</button>
+    </div>
+    <p class="waitlist-note" id="wl-note">Free · No account needed yet · Porto launch 2026</p>
+    <p class="waitlist-success" id="wl-success">You're in. <span>We'll be in touch.</span> ✦</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="#">CIRCLE</a>
+  <span class="footer-copy">© 2026 Circle. Porto, Portugal.</span>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">TikTok</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('[data-section]').forEach(s => observer.observe(s));
+  document.querySelectorAll('[data-stat]').forEach(s => observer.observe(s));
+  document.querySelectorAll('[data-cta]').forEach(s => observer.observe(s));
+
+  // Waitlist
+  document.getElementById('wl-btn').addEventListener('click', () => {
+    const email = document.getElementById('wl-email').value.trim();
+    if (!email || !email.includes('@')) {
+      const inp = document.getElementById('wl-email');
+      inp.style.borderColor = 'rgba(255,107,53,0.6)';
+      setTimeout(() => inp.style.borderColor = '', 800);
+      return;
+    }
+    document.getElementById('wl-form').style.display = 'none';
+    document.getElementById('wl-note').style.display = 'none';
+    document.getElementById('wl-success').style.display = 'block';
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
